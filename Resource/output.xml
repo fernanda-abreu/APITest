@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0 (Python 3.9.4 on win32)" generated="20220601 15:07:24.240" rpa="false" schemaversion="3">
+<suite id="s1" name="API" source="C:\Autom_API\resource\API.robot">
+<kw name="Create Session" library="RequestsLibrary" type="SETUP">
+<arg>jsonplaceholder</arg>
+<arg>http://thetestingworldapi.com/api/studentsDetails</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220601 15:07:25.804" level="INFO">Creating Session using : alias=jsonplaceholder, url=http://thetestingworldapi.com/api/studentsDetails, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220601 15:07:25.800" endtime="20220601 15:07:25.805"/>
+</kw>
+<test id="s1-t1" name="Request Test" line="14">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>first_name="Fernanda"</arg>
+<arg>middle_name="Abreu"</arg>
+<arg>last_name="Santos"</arg>
+<arg>date_of_birth="17/02/1989"</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220601 15:07:25.814" level="INFO">&amp;{body} = { first_name="Fernanda" | middle_name="Abreu" | last_name="Santos" | date_of_birth="17/02/1989" }</msg>
+<status status="PASS" starttime="20220601 15:07:25.811" endtime="20220601 15:07:25.814"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>jsonplaceholder</arg>
+<arg>/Post</arg>
+<arg>data=${body}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20220601 15:07:26.702" level="INFO">POST Request : url=http://thetestingworldapi.com/api/studentsDetails/Post 
+ path_url=/api/studentsDetails/Post 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '107', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=first_name=%22Fernanda%22&amp;middle_name=%22Abreu%22&amp;last_name=%22Santos%22&amp;date_of_birth=%2217%2F02%2F1989%22 
+ </msg>
+<msg timestamp="20220601 15:07:26.703" level="INFO">POST Response : url=http://thetestingworldapi.com/api/studentsDetails/Post 
+ status=201, reason=Created 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Location': 'http://thetestingworldapi.com/api/studentsDetails/2664884', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Wed, 01 Jun 2022 18:07:27 GMT', 'Content-Length': '126'} 
+ body={"id":2664884,"first_name":"\"Fernanda\"","middle_name":"\"Abreu\"","last_name":"\"Santos\"","date_of_birth":"\"17/02/1989\""} 
+ </msg>
+<msg timestamp="20220601 15:07:26.704" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20220601 15:07:25.816" endtime="20220601 15:07:26.705"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${resp.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220601 15:07:26.706" endtime="20220601 15:07:26.711"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${values}</var>
+<arg>${resp.json()}</arg>
+<arg>$.id</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220601 15:07:26.876" level="INFO">${values} = [2664884]</msg>
+<status status="PASS" starttime="20220601 15:07:26.712" endtime="20220601 15:07:26.876"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${first_name}</var>
+<arg>${resp.json()}</arg>
+<arg>$.first_name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220601 15:07:27.034" level="INFO">${first_name} = ['"Fernanda"']</msg>
+<status status="PASS" starttime="20220601 15:07:26.879" endtime="20220601 15:07:27.035"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${middle_name}</var>
+<arg>${resp.json()}</arg>
+<arg>$.middle_name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220601 15:07:27.245" level="INFO">${middle_name} = ['"Abreu"']</msg>
+<status status="PASS" starttime="20220601 15:07:27.037" endtime="20220601 15:07:27.245"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${last_name}</var>
+<arg>${resp.json()}</arg>
+<arg>$.last_name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220601 15:07:27.389" level="INFO">${last_name} = ['"Santos"']</msg>
+<status status="PASS" starttime="20220601 15:07:27.247" endtime="20220601 15:07:27.389"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${date_of_birth}</var>
+<arg>${resp.json()}</arg>
+<arg>$.date_of_birth</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220601 15:07:27.519" level="INFO">${date_of_birth} = ['"17/02/1989"']</msg>
+<status status="PASS" starttime="20220601 15:07:27.389" endtime="20220601 15:07:27.519"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${first_name[0]}</arg>
+<arg>"Fernanda"</arg>
+<arg>Os nomes não são iguais</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220601 15:07:27.521" endtime="20220601 15:07:27.526"/>
+</kw>
+<status status="PASS" starttime="20220601 15:07:25.807" endtime="20220601 15:07:27.529"/>
+</test>
+<doc>Resource geral para as APIS</doc>
+<status status="PASS" starttime="20220601 15:07:24.277" endtime="20220601 15:07:27.536"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="API">API</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

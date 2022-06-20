@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0 (Python 3.9.4 on win32)" generated="20220603 11:54:59.152" rpa="false" schemaversion="3">
+<suite id="s1" name="DSF API 002 FernandaAbreuM" source="C:\Autom_API\test\DSF_API_002_FernandaAbreuM.robot">
+<kw name="Create Session" library="RequestsLibrary" type="SETUP">
+<arg>jsonplaceholder</arg>
+<arg>http://thetestingworldapi.com/api/studentsDetails</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220603 11:54:59.516" level="INFO">Creating Session using : alias=jsonplaceholder, url=http://thetestingworldapi.com/api/studentsDetails, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220603 11:54:59.515" endtime="20220603 11:54:59.516"/>
+</kw>
+<test id="s1-t1" name="Desafio inicial API" line="16">
+<kw name="Passo 1" library="API_FernandaAbreuMSantos">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>first_name=Fernanda</arg>
+<arg>middle_name=Abreu</arg>
+<arg>last_name=Santos</arg>
+<arg>date_of_birth=17/02/1989</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220603 11:54:59.519" level="INFO">&amp;{body} = { first_name=Fernanda | middle_name=Abreu | last_name=Santos | date_of_birth=17/02/1989 }</msg>
+<status status="PASS" starttime="20220603 11:54:59.518" endtime="20220603 11:54:59.519"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>jsonplaceholder</arg>
+<arg>/Post</arg>
+<arg>data=${body}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20220603 11:55:00.272" level="INFO">POST Request : url=http://thetestingworldapi.com/api/studentsDetails/Post 
+ path_url=/api/studentsDetails/Post 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '83', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=first_name=Fernanda&amp;middle_name=Abreu&amp;last_name=Santos&amp;date_of_birth=17%2F02%2F1989 
+ </msg>
+<msg timestamp="20220603 11:55:00.272" level="INFO">POST Response : url=http://thetestingworldapi.com/api/studentsDetails/Post 
+ status=201, reason=Created 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Location': 'http://thetestingworldapi.com/api/studentsDetails/2665667', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Fri, 03 Jun 2022 14:54:59 GMT', 'Content-Length': '110'} 
+ body={"id":2665667,"first_name":"Fernanda","middle_name":"Abreu","last_name":"Santos","date_of_birth":"17/02/1989"} 
+ </msg>
+<msg timestamp="20220603 11:55:00.272" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20220603 11:54:59.519" endtime="20220603 11:55:00.272"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${resp.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220603 11:55:00.272" endtime="20220603 11:55:00.273"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${id}</var>
+<arg>${resp.json()}</arg>
+<arg>$.id</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220603 11:55:00.305" level="INFO">${id} = [2665667]</msg>
+<status status="PASS" starttime="20220603 11:55:00.273" endtime="20220603 11:55:00.305"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${id}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20220603 11:55:00.306" level="INFO">${id} = [2665667]</msg>
+<msg timestamp="20220603 11:55:00.306" level="INFO">${id} = None</msg>
+<status status="PASS" starttime="20220603 11:55:00.305" endtime="20220603 11:55:00.306"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${first_name}</var>
+<arg>${resp.json()}</arg>
+<arg>$.first_name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220603 11:55:00.326" level="INFO">${first_name} = ['Fernanda']</msg>
+<status status="PASS" starttime="20220603 11:55:00.306" endtime="20220603 11:55:00.326"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${middle_name}</var>
+<arg>${resp.json()}</arg>
+<arg>$.middle_name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220603 11:55:00.361" level="INFO">${middle_name} = ['Abreu']</msg>
+<status status="PASS" starttime="20220603 11:55:00.327" endtime="20220603 11:55:00.361"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${last_name}</var>
+<arg>${resp.json()}</arg>
+<arg>$.last_name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220603 11:55:00.383" level="INFO">${last_name} = ['Santos']</msg>
+<status status="PASS" starttime="20220603 11:55:00.361" endtime="20220603 11:55:00.383"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${date_of_birth}</var>
+<arg>${resp.json()}</arg>
+<arg>$.date_of_birth</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220603 11:55:00.403" level="INFO">${date_of_birth} = ['17/02/1989']</msg>
+<status status="PASS" starttime="20220603 11:55:00.383" endtime="20220603 11:55:00.403"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${first_name[0]}</arg>
+<arg>Fernanda</arg>
+<arg>Os nomes não são iguais</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220603 11:55:00.403" endtime="20220603 11:55:00.404"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${middle_name[0]}</arg>
+<arg>Abreu</arg>
+<arg>Os nomes não são iguais</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220603 11:55:00.404" endtime="20220603 11:55:00.405"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${last_name[0]}</arg>
+<arg>Santos</arg>
+<arg>Os nomes não são iguais</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220603 11:55:00.405" endtime="20220603 11:55:00.406"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${date_of_birth[0]}</arg>
+<arg>17/02/1989</arg>
+<arg>Os nomes não são iguais</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" starttime="20220603 11:55:00.406" endtime="20220603 11:55:00.406"/>
+</kw>
+<status status="PASS" starttime="20220603 11:54:59.517" endtime="20220603 11:55:00.406"/>
+</kw>
+<kw name="Passo 2" library="API_FernandaAbreuMSantos">
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>jsonplaceholder</arg>
+<arg>/${id[0]}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220603 11:55:00.770" level="INFO">GET Request : url=http://thetestingworldapi.com/api/studentsDetails/2665667 
+ path_url=/api/studentsDetails/2665667 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220603 11:55:00.770" level="INFO">GET Response : url=http://thetestingworldapi.com/api/studentsDetails/2665667 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Fri, 03 Jun 2022 14:54:59 GMT', 'Content-Length': '135'} 
+ body={"status":"true","data":{"id":2665667,"first_name":"Fernanda","middle_name":"Abreu","last_name":"Santos","date_of_birth":"17/02/1989"}} 
+ </msg>
+<msg timestamp="20220603 11:55:00.770" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220603 11:55:00.408" endtime="20220603 11:55:00.770"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${resp.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220603 11:55:00.771" endtime="20220603 11:55:00.772"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20220603 11:55:00.772" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220603 11:55:00.772" endtime="20220603 11:55:00.772"/>
+</kw>
+<status status="PASS" starttime="20220603 11:55:00.407" endtime="20220603 11:55:00.772"/>
+</kw>
+<kw name="Passo 3" library="API_FernandaAbreuMSantos">
+<kw name="DELETE On Session" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>jsonplaceholder</arg>
+<arg>/${id[0]}</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<msg timestamp="20220603 11:55:01.136" level="INFO">DELETE Request : url=http://thetestingworldapi.com/api/studentsDetails/2665667 
+ path_url=/api/studentsDetails/2665667 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20220603 11:55:01.137" level="INFO">DELETE Response : url=http://thetestingworldapi.com/api/studentsDetails/2665667 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Fri, 03 Jun 2022 14:55:00 GMT', 'Content-Length': '46'} 
+ body={"status":"true","msg":"Delete  data success"} 
+ </msg>
+<msg timestamp="20220603 11:55:01.137" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220603 11:55:00.773" endtime="20220603 11:55:01.137"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${resp.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220603 11:55:01.137" endtime="20220603 11:55:01.138"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20220603 11:55:01.139" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220603 11:55:01.138" endtime="20220603 11:55:01.139"/>
+</kw>
+<status status="PASS" starttime="20220603 11:55:00.773" endtime="20220603 11:55:01.139"/>
+</kw>
+<kw name="Passo 4" library="API_FernandaAbreuMSantos">
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${resp}</var>
+<arg>jsonplaceholder</arg>
+<arg>/${id[0]}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220603 11:55:01.503" level="INFO">GET Request : url=http://thetestingworldapi.com/api/studentsDetails/2665667 
+ path_url=/api/studentsDetails/2665667 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220603 11:55:01.503" level="INFO">GET Response : url=http://thetestingworldapi.com/api/studentsDetails/2665667 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Fri, 03 Jun 2022 14:55:00 GMT', 'Content-Length': '40'} 
+ body={"status":"false","msg":"No data Found"} 
+ </msg>
+<msg timestamp="20220603 11:55:01.504" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220603 11:55:01.140" endtime="20220603 11:55:01.504"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${resp.json()}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220603 11:55:01.504" endtime="20220603 11:55:01.507"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20220603 11:55:01.510" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20220603 11:55:01.507" endtime="20220603 11:55:01.510"/>
+</kw>
+<status status="PASS" starttime="20220603 11:55:01.139" endtime="20220603 11:55:01.511"/>
+</kw>
+<status status="PASS" starttime="20220603 11:54:59.516" endtime="20220603 11:55:01.513"/>
+</test>
+<doc>Resource geral para as APIS</doc>
+<status status="PASS" starttime="20220603 11:54:59.154" endtime="20220603 11:55:01.517"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="DSF API 002 FernandaAbreuM">DSF API 002 FernandaAbreuM</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
